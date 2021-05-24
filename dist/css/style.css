@@ -1,0 +1,255 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@400;700&display=swap");
+:root {
+  --mobile-width: 375px;
+  --Desktop-width: 1440px;
+  --main-bg: hsl(222, 26%, 31%);
+  --toggle-bg: hsl(223, 31%, 20%);
+  --screen-bg: hsl(224, 36%, 15%);
+  --del-bg: hsl(225, 21%, 49%);
+  --del-shadow: hsl(224, 28%, 35%);
+  --result-bg: hsl(6, 63%, 50%);
+  --result-shadow: hsl(6, 70%, 34%);
+  --key-bg: hsl(30, 25%, 89%);
+  --key-shadow: hsl(28, 16%, 65%);
+  --key-cl: hsl(221, 14%, 31%);
+  --del-cl: #fff;
+  --result-cl: #fff;
+  --display-cl: #fff;
+}
+
+html[data-theme="light"] {
+  --main-bg: hsl(0, 0%, 90%);
+  --toggle-bg: hsl(0, 5%, 81%);
+  --screen-bg: hsl(0, 0%, 93%);
+  --del-bg: hsl(185, 42%, 37%);
+  --del-shadow: hsl(185, 58%, 25%);
+  --result-bg: hsl(25, 98%, 40%);
+  --result-shadow: hsl(25, 99%, 27%);
+  --key-bg: hsl(45, 7%, 89%);
+  --key-shadow: hsl(35, 11%, 61%);
+  --key-cl: hsl(60, 10%, 19%);
+  --del-cl: #fff;
+  --result-cl: #fff;
+  --display-cl: hsl(60, 10%, 19%);
+}
+
+html[data-theme="dark"] {
+  --main-bg: hsl(268, 75%, 9%);
+  --toggle-bg: hsl(268, 71%, 12%);
+  --screen-bg: hsl(268, 71%, 12%);
+  --del-bg: hsl(281, 89%, 26%);
+  --del-shadow: hsl(285, 91%, 52%);
+  --result-bg: hsl(176, 100%, 44%);
+  --result-shadow: hsl(177, 92%, 70%);
+  --key-bg: hsl(268, 47%, 21%);
+  --key-shadow: hsl(290, 70%, 36%);
+  --key-cl: hsl(52, 100%, 62%);
+  --del-cl: #fff;
+  --result-cl: hsl(198, 20%, 13%);
+  --display-cl: hsl(52, 100%, 62%);
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+  font-family: Spartan, Arial, Helvetica, sans-serif;
+}
+
+.main {
+  background: var(--main-bg);
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+  margin: 0 auto;
+  width: var(--mobile-width);
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 1rem;
+  width: 100%;
+  color: var(--del-cl);
+}
+
+.header p {
+  font-weight: bold;
+  color: var(--display-cl);
+  font-size: 2rem;
+}
+
+.header .theme-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 0.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header .theme-container p {
+  text-transform: uppercase;
+  margin-top: 2em;
+  font-size: 0.7rem;
+}
+
+.header .theme-container .toggle-container {
+  width: 3.5rem;
+  margin-left: 1.5em;
+}
+
+.header .theme-container .toggle-container .toggle-number {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: 0.9rem;
+  color: var(--display-cl);
+}
+
+.header .theme-container .toggle-container .toggle-btn {
+  height: 1.25rem;
+  width: 100%;
+  border-radius: 20px;
+  position: relative;
+  background: var(--toggle-bg);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.header .theme-container .toggle-container .toggle-btn .circle {
+  height: 0.8rem;
+  width: 0.8rem;
+  position: absolute;
+  top: 4.5px;
+  left: 4.5px;
+  border-radius: 50%;
+  background: var(--result-bg);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.header .theme-container .toggle-container .toggle-btn div {
+  display: block;
+  width: 1rem;
+  height: 1.25rem;
+  margin: 0;
+  cursor: pointer;
+}
+
+.screen {
+  width: 100%;
+  height: 3em;
+  position: relative;
+  border-radius: 0.5em;
+  background: var(--screen-bg);
+}
+
+.screen input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0.5em;
+  font-size: 2.5rem;
+  padding: 0.7em;
+  text-align: right;
+  background: var(--screen-bg);
+  color: var(--display-cl);
+}
+
+.keyboard {
+  margin-top: 1rem;
+  padding: 0.5em;
+  border-radius: 0.5rem;
+  background: var(--toggle-bg);
+}
+
+.keyboard .keyboard-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 0;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.keyboard .keyboard-container .calc-btn {
+  font-size: 2rem;
+  font-weight: bold;
+  width: 4.6rem;
+  height: 4.8rem;
+  margin: 0.35rem;
+  border: 0;
+  border-radius: 0.6rem;
+  background: var(--key-bg);
+  color: var(--key-cl);
+  -webkit-box-shadow: 0 5px var(--key-shadow);
+          box-shadow: 0 5px var(--key-shadow);
+}
+
+.keyboard .keyboard-container .calc-btn:active {
+  -webkit-box-shadow: 0 0;
+          box-shadow: 0 0;
+  -webkit-transform: translateY(5px);
+          transform: translateY(5px);
+}
+
+.keyboard .keyboard-container .calc-del {
+  font-size: 1rem;
+  background: var(--del-bg);
+  color: var(--del-cl);
+  -webkit-box-shadow: 0 5px var(--del-shadow);
+          box-shadow: 0 5px var(--del-shadow);
+}
+
+.keyboard .keyboard-container .calc-result {
+  font-size: 1rem;
+  background: var(--result-bg);
+  color: var(--result-cl);
+  -webkit-box-shadow: 0 5px var(--result-shadow);
+          box-shadow: 0 5px var(--result-shadow);
+}
+
+.keyboard .keyboard-container .big-btn {
+  width: 9.9rem;
+}
+/*# sourceMappingURL=style.css.map */

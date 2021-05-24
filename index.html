@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="./dist/css/style.css">
+  
+  <title>Frontend Mentor | Calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="container">
+      <div class="header">
+        <p>calc</p>
+        <div class="theme-container">
+          <p>theme</p>
+          <div class="toggle-container">
+            <div class="toggle-number">
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+            </div>
+            <div class="toggle-btn">
+              <span class="circle"></span>
+              <div class="theme-1"></div>
+              <div class="theme-2"></div>
+              <div class="theme-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen">
+        <input type="text" name="screen" id="screen" disabled>
+      </div>
+      <div class="keyboard">
+        <div class="keyboard-container">
+          <button class="calc-btn ">7</button>
+          <button class="calc-btn">8</button>
+          <button class="calc-btn">9</button>
+          <button class="calc-btn calc-del">DEL</button>
+          <button class="calc-btn">4</button>
+          <button class="calc-btn">5</button>
+          <button class="calc-btn">6</button>
+          <button class="calc-btn">+</button>
+          <button class="calc-btn">1</button>
+          <button class="calc-btn">2</button>
+          <button class="calc-btn">3</button>
+          <button class="calc-btn">-</button>
+          <button class="calc-btn">.</button>
+          <button class="calc-btn">0</button>
+          <button class="calc-btn">/</button>
+          <button class="calc-btn">x</button>
+          <button class="calc-btn calc-del big-btn">RESET</button>
+          <button class="calc-btn calc-result big-btn">=</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./dist/js/app.js"></script>
+</body>
+</html>
