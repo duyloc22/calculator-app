@@ -1,23 +1,40 @@
-const operators = ['+', '-', 'x', '/']
+const operators = [['+', '-'], ['x', '/']]
+
+const doesStartswithOperator = (val) => {
+    return operators[1].includes(val[0])
+}
+
 const doesEndswithOperator = (val) => {
-    return operators.includes(val[val.length - 1])
+    return operators[0].includes(val[val.length - 1]) || operators[1].includes(val[val.length - 1])
+}
+
+const splitNumbers = (text) => {
+    if (text instanceof String) {
+        return (text.split(/[\x\/\+\-]/).filter(x => x !== ""))
+    }
+    return text
 }
 
 const validateInput = (current = "", input = "") => {
     const lastChar = current[current.length - 1]
-    if (operators.includes(lastChar) && operators.includes(input)) {
-        if (lastChar === input) {
-            console.log("same operator")
-            return current
+    for (let arr of operators) {
+        if (arr.includes(lastChar) && arr.includes(input)) {
+            if (lastChar === input) {
+                // console.log("same operator")
+                return current
+            }
+            if (arr.includes(lastChar) && arr.includes(input)) {
+                // console.log(`lastchar : ${lastChar}, input: ${input}`)
+                return `${current.slice(0, -1)}${input}`
+            }
         }
-        if (lastChar === '[x/]')
-            console.log("lastchar is [x/]")
-        if (input === '[x/]')
-            console.log("input is [x/]")
+    }
+    if (operators[0].includes(lastChar) && operators[1].includes(input)) {
+        return current
     }
 
+    // console.log(`${lastChar}, ${input}`);
     return `${current}${input}`
-    console.log("hey there");
 }
 
-export { doesEndswithOperator, validateInput }
+export { doesStartswithOperator, doesEndswithOperator, validateInput }

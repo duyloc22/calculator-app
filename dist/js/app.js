@@ -1,39 +1,72 @@
-import { doesEndswithOperator, validateInput } from "./improvements.js"
+import { doesEndswithOperator, doesStartswithOperator, validateInput } from "./improvements.js"
 
-validateInput()
 //DOM
 const buttons = document.querySelectorAll('.calc-btn')
-// const deleteBtn = document.querySelector('.calc-del')
-// const reset = document.querySelector('.calc-reset')
-// const result = document.querySelector('.calc-result')
 const screenDisplay = document.querySelector('#screen')
 const themeToggle = document.querySelectorAll('.toggle-btn > div')
 const circle = document.querySelector('.circle')
 
 //calculation
 screenDisplay.value = ''
-for (const button of buttons) {
-    button.addEventListener('click', (e) => {
-        let currVal = screenDisplay.value
-        const inputVal = e.target.textContent
-        switch (inputVal) {
-            case "DEL":
-                currVal = currVal.slice(0, -1); break;
-            case "RESET": currVal = ''; break;
-            case "=":
-                if (currVal && !doesEndswithOperator(currVal)) {
-                    currVal = currVal.replace('x', '*')
-                    console.log(currVal)
-                    currVal = eval(currVal);
-                }
-                break;
+const handleClick = (e) => {
+    let currVal = screenDisplay.value
+    let scrollDirection = 1
+
+    let inputVal = e.target.textContent
+    if (e.type === "keyup") {
+        switch (e.key) {
+            case "Delete":
+                inputVal = "RESET"; break;
+            case "Backspace":
+                inputVal = "DEL"; break;
+            case "Enter":
+                inputVal = "="; break;
+            case "*":
+                inputVal = "x"; break;
+            case "+":
+            case "-":
+            case "/":
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9":
+            case "0":
+            case ".":
+                inputVal = `${e.key}`; break;
             default:
-                currVal += validateInput(currVal, inputVal); break;
+                inputVal = ""
         }
-        screenDisplay.value = currVal
-        screenDisplay.scrollLeft = screenDisplay.scrollWidth;
-    })
+    }
+    switch (inputVal) {
+        case "DEL":
+            currVal = currVal.slice(0, -1); break;
+        case "RESET": currVal = ''; break;
+        case "=":
+            if (currVal && !doesStartswithOperator(currVal) && !doesEndswithOperator(currVal)) {
+                currVal = currVal.replace('x', '*')
+                console.log(currVal)
+                currVal = eval(currVal);
+                scrollDirection = -1
+            }
+            break;
+        default:
+            currVal = validateInput(currVal, inputVal); break;
+    }
+    screenDisplay.value = currVal
+    screenDisplay.scrollLeft = scrollDirection * screenDisplay.scrollWidth;
 }
+
+for (const button of buttons) {
+    button.addEventListener('click', handleClick)
+}
+
+// keyboard eventListner
+window.addEventListener("keyup", handleClick)
 
 
 for (const themeBtn of themeToggle) {
