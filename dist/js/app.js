@@ -3,9 +3,9 @@ import { doesEndswithOperator, validateInput } from "./improvements.js"
 validateInput()
 //DOM
 const buttons = document.querySelectorAll('.calc-btn')
-const deleteBtn = document.querySelector('.calc-del')
-const reset = document.querySelector('.calc-reset')
-const result = document.querySelector('.calc-result')
+// const deleteBtn = document.querySelector('.calc-del')
+// const reset = document.querySelector('.calc-reset')
+// const result = document.querySelector('.calc-result')
 const screenDisplay = document.querySelector('#screen')
 const themeToggle = document.querySelectorAll('.toggle-btn > div')
 const circle = document.querySelector('.circle')
@@ -28,7 +28,7 @@ for (const button of buttons) {
                 }
                 break;
             default:
-                currVal += inputVal; break;
+                currVal += validateInput(currVal, inputVal); break;
         }
         screenDisplay.value = currVal
         screenDisplay.scrollLeft = screenDisplay.scrollWidth;
