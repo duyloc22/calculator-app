@@ -9,13 +9,24 @@ const doesEndswithOperator = (val) => {
 }
 
 const splitNumbers = (text) => {
-    if (text instanceof String) {
+    if (typeof (text) === "string") {
+        // let arrOfNums = 
         return (text.split(/[\x\/\+\-]/).filter(x => x !== ""))
+        // return arrOfNums.map(numStr => parseInt(numStr))
     }
     return text
 }
 
+// validates input and reutrns corrected state after worng input 
 const validateInput = (current = "", input = "") => {
+    // checks for multiple dots
+    if (input === ".") {
+        const numbersArr = splitNumbers(current)
+        const lastNo = numbersArr[numbersArr.length - 1]
+        return (lastNo.split("").includes(".")) ? current : `${current}.`
+    }
+
+    // checks for consucutive operators
     const lastChar = current[current.length - 1]
     for (let arr of operators) {
         if (arr.includes(lastChar) && arr.includes(input)) {
@@ -29,6 +40,7 @@ const validateInput = (current = "", input = "") => {
             }
         }
     }
+    // makes negative multiplication possible 
     if (operators[0].includes(lastChar) && operators[1].includes(input)) {
         return current
     }

@@ -13,6 +13,7 @@ const handleClick = (e) => {
     let scrollDirection = 1
 
     let inputVal = ""
+    // if event type is a keyboard event
     if (e.type === "keyup") {
         switch (e.key) {
             case "Delete":
@@ -45,6 +46,7 @@ const handleClick = (e) => {
     } else {
         inputVal = e.target.textContent
     }
+    
     switch (inputVal) {
         case "DEL":
             currVal = currVal.slice(0, -1); break;
@@ -64,6 +66,7 @@ const handleClick = (e) => {
     screenDisplay.scrollLeft = scrollDirection * screenDisplay.scrollWidth;
 }
 
+// click events
 for (const button of buttons) {
     button.addEventListener('click', handleClick)
 }
