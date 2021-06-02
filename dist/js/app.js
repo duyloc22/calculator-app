@@ -1,64 +1,95 @@
-//DOM
+import { doesEndswithOperator, doesStartswithOperator, validateInput } from "./helper.js"
 
+//DOM
 const buttons = document.querySelectorAll('.calc-btn')
-const deleteBtn = document.querySelector('.calc-del')
-const reset = document.querySelector('.calc-reset')
-const result = document.querySelector('.calc-result')
 const screenDisplay = document.querySelector('#screen')
 const themeToggle = document.querySelectorAll('.toggle-btn > div')
 const circle = document.querySelector('.circle')
 
 //calculation
-screenDisplay.value = '' 
-for(const button of buttons){
-    button.addEventListener('click', (e) =>{
-        switch(e.target.textContent){
-            case "0": screenDisplay.value += '0'; break ;
-            case "1": screenDisplay.value += '1'; break ;
-            case "2": screenDisplay.value += '2'; break ;
-            case "3": screenDisplay.value += '3'; break ;
-            case "4": screenDisplay.value += '4'; break ;
-            case "5": screenDisplay.value += '5'; break ;
-            case "6": screenDisplay.value += '6'; break ;
-            case "7": screenDisplay.value += '7'; break ;
-            case "8": screenDisplay.value += '8'; break ;
-            case "9": screenDisplay.value += '9'; break ;
-            case ".": screenDisplay.value += '.'; break ;
-            case "+": screenDisplay.value += '+'; break ;
-            case "-": screenDisplay.value += '-'; break ;
-            case "x": screenDisplay.value += 'x'; break ;
-            case "/": screenDisplay.value += '/'; break ;
-            case "DEL": 
-                screenDisplay.value = screenDisplay.value.slice(0, -1) ; break ;
-            case "RESET": screenDisplay.value = ''; break ;
-            case "=": 
-            if(screenDisplay.value){
-                screenDisplay.value = screenDisplay.value.replace('x','*')
-                console.log(screenDisplay.value)
-                screenDisplay.value = eval(screenDisplay.value);
-                break ;
-            }
+screenDisplay.value = ''
+const handleClick = (e) => {
+    let currVal = screenDisplay.value
+    let scrollDirection = 1
 
+    let inputVal = ""
+    // if event type is a keyboard event
+    if (e.type === "keyup") {
+        switch (e.key) {
+            case "Delete":
+                inputVal = `RESET`; break;
+            case "Backspace":
+                inputVal = `DEL`; break;
+            case "Enter":
+                inputVal = `=`; break;
+            case "*":
+                inputVal = `x`; break;
+            case "+":
+            case "-":
+            case "/":
+            case "=":
+            case "1":
+            case "2":
+            case "3":
+            case "4":
+            case "5":
+            case "6":
+            case "7":
+            case "8":
+            case "9":
+            case "0":
+            case ".":
+                inputVal = `${e.key}`; break;
+            default:
+                inputVal = ""
         }
-    })
+    } else {
+        inputVal = e.target.textContent
+    }
+    
+    switch (inputVal) {
+        case "DEL":
+            currVal = currVal.slice(0, -1); break;
+        case "RESET": currVal = ''; break;
+        case "=":
+            if (currVal && !doesStartswithOperator(currVal) && !doesEndswithOperator(currVal)) {
+                currVal = currVal.replace('x', '*')
+                console.log(currVal)
+                currVal = eval(currVal);
+                scrollDirection = -1
+            }
+            break;
+        default:
+            currVal = validateInput(currVal, inputVal); break;
+    }
+    screenDisplay.value = currVal
+    screenDisplay.scrollLeft = scrollDirection * screenDisplay.scrollWidth;
 }
 
+// click events
+for (const button of buttons) {
+    button.addEventListener('click', handleClick)
+}
 
-for (const themeBtn of themeToggle){
+// keyboard eventListner
+window.addEventListener("keyup", handleClick)
+
+
+for (const themeBtn of themeToggle) {
     let theme = localStorage.getItem('theme') || 'default'
-    if(theme != 'default'){
-        document.documentElement.setAttribute('data-theme',theme);
-        (theme == 'light')? circle.style.left = '35%': circle.style.left = '70%';
-    }else{
+    if (theme != 'default') {
+        document.documentElement.setAttribute('data-theme', theme);
+        (theme == 'light') ? circle.style.left = '35%' : circle.style.left = '70%';
+    } else {
         document.documentElement.removeAttribute('data-theme')
         circle.style.left = '4.5px';
     }
     console.log(theme)
-    themeBtn.addEventListener("click",(e) =>{
-        if(e.target.classList.value == 'theme-2'){
+    themeBtn.addEventListener("click", (e) => {
+        if (e.target.classList.value == 'theme-2') {
             theme = 'light'
             circle.style.left = '35%';
-        } else if(e.target.classList.value == 'theme-3'){
+        } else if (e.target.classList.value == 'theme-3') {
             theme = 'dark'
             circle.style.left = '70%';
         } else {
@@ -66,14 +97,14 @@ for (const themeBtn of themeToggle){
             circle.style.left = '4.5px';
         }
 
-        if(theme != 'default'){
-            document.documentElement.setAttribute('data-theme',theme)
-        }else(
+        if (theme != 'default') {
+            document.documentElement.setAttribute('data-theme', theme)
+        } else (
             document.documentElement.removeAttribute('data-theme')
         )
         localStorage.setItem('theme', theme)
         console.log(theme)
     })
-    
+
     console.log(theme)
 }
