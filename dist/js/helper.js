@@ -10,9 +10,7 @@ const doesEndswithOperator = (val) => {
 
 const splitNumbers = (text) => {
     if (typeof (text) === "string") {
-        // let arrOfNums = 
         return (text.split(/[\x\/\+\-]/).filter(x => x !== ""))
-        // return arrOfNums.map(numStr => parseInt(numStr))
     }
     return text
 }
