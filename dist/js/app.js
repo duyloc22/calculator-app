@@ -1,4 +1,4 @@
-import { doesEndswithOperator, doesStartswithOperator, validateInput } from "./improvements.js"
+import { doesEndswithOperator, doesStartswithOperator, validateInput } from "./helper.js"
 
 //DOM
 const buttons = document.querySelectorAll('.calc-btn')
@@ -12,20 +12,21 @@ const handleClick = (e) => {
     let currVal = screenDisplay.value
     let scrollDirection = 1
 
-    let inputVal = e.target.textContent
+    let inputVal = ""
     if (e.type === "keyup") {
         switch (e.key) {
             case "Delete":
-                inputVal = "RESET"; break;
+                inputVal = `RESET`; break;
             case "Backspace":
-                inputVal = "DEL"; break;
+                inputVal = `DEL`; break;
             case "Enter":
-                inputVal = "="; break;
+                inputVal = `=`; break;
             case "*":
-                inputVal = "x"; break;
+                inputVal = `x`; break;
             case "+":
             case "-":
             case "/":
+            case "=":
             case "1":
             case "2":
             case "3":
@@ -41,6 +42,8 @@ const handleClick = (e) => {
             default:
                 inputVal = ""
         }
+    } else {
+        inputVal = e.target.textContent
     }
     switch (inputVal) {
         case "DEL":
