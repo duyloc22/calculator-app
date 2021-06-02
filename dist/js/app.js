@@ -31,6 +31,7 @@ for (const button of buttons) {
                 currVal += inputVal; break;
         }
         screenDisplay.value = currVal
+        screenDisplay.scrollLeft = screenDisplay.scrollWidth;
     })
 }
 

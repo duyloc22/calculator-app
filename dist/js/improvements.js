@@ -4,9 +4,11 @@ const doesEndswithOperator = (val) => {
 }
 
 const validateInput = (current = "", input = "") => {
-    if (!operators.includes(current[current.length - 1]) || !operators.includes(input))
-        return `${current}${input}`
-
+    if (doesEndswithOperator(current) && operators.includes(input)){
+        // todo
+    }
+    
+    return `${current}${input}`
     console.log("hey there");
 }
 
